@@ -33,11 +33,11 @@ THE SOFTWARE.
 #ifndef _SDL_FONTCACHE_H__
 #define _SDL_FONTCACHE_H__
 
-#include "SDL.h"
-#include "SDL_ttf.h"
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 
 #ifdef FC_USE_SDL_GPU
-    #include "SDL_gpu.h"
+#include "SDL_gpu.h"
 #endif
 
 
@@ -49,7 +49,7 @@ extern "C" {
 
 
 // Let's pretend this exists...
-#define TTF_STYLE_OUTLINE	16
+#define TTF_STYLE_OUTLINE    16
 
 
 
@@ -69,28 +69,24 @@ extern "C" {
 
 // SDL_FontCache types
 
-typedef enum
-{
+typedef enum {
     FC_ALIGN_LEFT,
     FC_ALIGN_CENTER,
     FC_ALIGN_RIGHT
 } FC_AlignEnum;
 
-typedef enum
-{
+typedef enum {
     FC_FILTER_NEAREST,
     FC_FILTER_LINEAR
 } FC_FilterEnum;
 
-typedef struct FC_Scale
-{
+typedef struct FC_Scale {
     float x;
     float y;
 
 } FC_Scale;
 
-typedef struct FC_Effect
-{
+typedef struct FC_Effect {
     FC_AlignEnum alignment;
     FC_Scale scale;
     SDL_Color color;
@@ -101,8 +97,7 @@ typedef struct FC_Effect
 typedef struct FC_Font FC_Font;
 
 
-typedef struct FC_GlyphData
-{
+typedef struct FC_GlyphData {
     SDL_Rect rect;
     int cache_level;
 
