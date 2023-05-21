@@ -2394,14 +2394,18 @@ FC_Rect FC_DrawScale(FC_Font* font, FC_Target* dest, float x, float y, FC_Scale 
     return FC_RenderLeft(font, dest, x, y, scale, fc_buffer);
 }
 
-FC_Rect FC_DrawAlign(FC_Font* font, FC_Target* dest, float x, float y, FC_AlignEnum align, const char* formatted_text, ...)
+// TODO: Implement method that both Aligns and Colors the given message.
+
+
+
+FC_Rect FC_DrawAlignC(FC_Font* font, FC_Target* dest, float x, float y, FC_AlignEnum align, SDL_Color color, const char* formatted_text, ...)
 {
     if(formatted_text == NULL || font == NULL)
         return FC_MakeRect(x, y, 0, 0);
 
     FC_EXTRACT_VARARGS(fc_buffer, formatted_text);
 
-    set_color_for_all_caches(font, font->default_color);
+    set_color_for_all_caches(font, color);
 
     FC_Rect result;
     switch(align)
@@ -2421,6 +2425,12 @@ FC_Rect FC_DrawAlign(FC_Font* font, FC_Target* dest, float x, float y, FC_AlignE
     }
 
     return result;
+}
+
+FC_Rect FC_DrawAlign(FC_Font* font, FC_Target* dest, float x, float y, FC_AlignEnum align, const char* formatted_text, ...)
+{
+    FC_DrawAlignC(font, dest, x, y, align, font->default_color, formatted_text);
+
 }
 
 FC_Rect FC_DrawColor(FC_Font* font, FC_Target* dest, float x, float y, SDL_Color color, const char* formatted_text, ...)
